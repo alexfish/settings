@@ -1,0 +1,39 @@
+. ~/.prompt
+. ~/.xcode-aliases
+
+alias l='ls -alFh'
+alias c='clear'
+alias pico='pico -w'
+alias gpat='git push --all && git push --tags'
+alias gs='git status'
+alias g-='git pull --rebase'
+alias g+='git push'
+alias gg='g- && g+'
+alias rogo='git log --oneline --author=katt --after=`date +%Y-%m-%d`" 00:00" | cut -d" " -f2- | pbcopy'
+alias rbp='rails_best_practices -f html --with-textmate . ; open rails_best_practices_output.html'
+alias gco='git co'
+alias gci='git ci'
+alias grb='git rb'
+
+alias xcode='open -a xcode'
+alias text='open -a TextEdit'
+alias pre='open -a Preview'
+alias l='ls'
+alias ll='ls -l'
+alias la='ls -a'
+alias lo='logout'
+alias c='clear'
+alias ttop='top -U $USER'
+alias gpt='git push && git push --tags'
+alias gptd='git push && git push --tags && git checkout develop'
+
+function vt {
+  PREVIOUS_TAG=`git describe | cut -d'-' -f1`
+
+  echo
+  echo "Showing commits from ${PREVIOUS_TAG} to HEAD"
+  echo
+
+  git log --oneline ${PREVIOUS_TAG}..HEAD
+  git log --oneline ${PREVIOUS_TAG}..HEAD | cut -d" " -f2- | pbcopy
+}

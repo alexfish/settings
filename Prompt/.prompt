@@ -1,0 +1,15 @@
+. ~/.git-completion.sh
+
+function last_two_dirs {
+  pwd |rev| awk -F / '{print $1,$2}' | rev | sed s_\ _/_
+}
+
+function git_dirty_flag {
+  git status 2> /dev/null | grep -c : | awk '{if ($1 > 0) print "⚡"}'
+}
+
+function set_prompt {
+  PS1="\e]2;\w\a\e[33\e[0;32m\]$(date +%H:%M:%S) \e[33\e[0;36m\]$(last_two_dirs)\e[33\e[0m\]$(__git_ps1)\e[33\e[0;33m\]$(git_dirty_flag)\e[33\e[0m\] ✪ "
+}
+
+PROMPT_COMMAND=set_prompt

@@ -1,0 +1,49 @@
+{
+    /**
+     * Where your `node` executable lives. If this is not specified, then
+     * it is expected to be on Sublime's path.
+     */
+     "coffee_path": ""
+
+    /**
+     * Where your `node` executable lives. If this is not specified, then
+     * it is expected to be on Sublime's path.
+     */
+,    "node_path": ""
+
+    /**
+     * How should the plugin invoke your coffee executable.
+     *
+     * This can be the name of the executable if its in your path,
+     * or it can be the absolute path to it (although in that case,
+     * try to use the `coffee_path` setting).
+     *
+     * You can find where your executable is by running "which coffee"
+     * in your terminal.
+     *
+     * Defaults:
+     *   Windows   -> 'coffee.cmd'
+     *   Linux/OSX -> 'coffee'
+     */
+,    "coffee_executable": ""
+
+
+    /**
+     * Compile without a top-level function wrapper.
+     */
+,   "bare": false
+
+
+    /**
+     * Enables support for the CoffeeScriptRedux compiler. Experimental feature!
+     */
+,   "coffee_script_redux": false
+
+
+    /**
+     * The location of your CoffeeScriptRedux compiler. This option does nothing
+     * if the `coffee_script_redux` flag is off.
+     */
+,   "redux_coffee_path": ""
+
+}
