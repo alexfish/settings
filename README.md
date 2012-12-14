@@ -18,3 +18,5 @@ Add the following lines to your own bash profile
     . ~/.aliases
     source ~/git-completion.bash
 
+#### Credits
+Thanks to [Mio Nilsson](https://github.com/iceydee) for the prompt.
