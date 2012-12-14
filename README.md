@@ -14,7 +14,7 @@ Place the `Prompt` files in `~/`
 
 ### If not using the bash profile
 Add the following lines to your own bash profile
-  . ~/.aliases
   
-  source ~/git-completion.bash
+    . ~/.aliases
+    source ~/git-completion.bash
 
