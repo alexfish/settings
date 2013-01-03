@@ -1,0 +1,68 @@
+#!/bin/bash
+
+REPO="alexefish/settings"
+TMP_FILENAME="_settings.tar.gz"
+
+fetch_version()
+{
+  # Arg1: Version, ie. v1.0 -> will return v1.0.1 etc.
+
+  curl -s https://api.github.com/repos/${REPO}/tags |
+    sed -n '/"name": / {s/^.*".*": "\(.*\)".*$/\1/; p;}' |
+    sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n -k 5,5n |
+    GREP_OPTIONS="" \grep "^${1:-}" | tail -n 1
+}
+
+archive_dir()
+{
+  # Arg1: tag name (version)
+  # Returns the name of the archive folder
+
+  typeset _version
+  _version=$1
+
+  local _archiveVersion=`echo ${_version} | sed 's/[^0-9\.]//g'`
+  local _repoName=`echo ${REPO} | cut -d'/' -f2`
+
+  echo "/tmp/${_repoName}-${_archiveVersion}"
+}
+
+download_archive()
+{
+  # Arg1: Tag name (version), ie. v0.0.1 etc.
+  typeset _version
+  _version=$1
+
+  local _url="https://github.com/${REPO}/archive/${_version}.tar.gz"
+
+  if curl -L ${_url} -o /tmp/${TMP_FILENAME}
+  then
+    true
+  else
+    echo "Could not download '${_url}'."
+    exit -1
+  fi
+}
+
+unpack_archive()
+{
+  # Arg1: Tag name (version), ie. v0.0.1 etc.
+  typeset _version
+  _version=$1
+
+  cd /tmp
+  tar zxf ${TMP_FILENAME}
+}
+
+VERSION=`fetch_version v0.0`
+download_archive ${VERSION}
+unpack_archive ${VERSION}
+
+# Run the install-script inside the archive
+cd `archive_dir ${VERSION}`
+./install.sh `archive_dir ${VERSION}`
+
+# Cleanup
+cd /tmp
+rm -f ${TMP_FILENAME}
+rm -rf `archive_dir ${VERSION}`
