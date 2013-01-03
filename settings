@@ -1,6 +1,6 @@
 #!/bin/bash
 
-REPO="iceydee/settings"
+REPO="alexefish/settings"
 TMP_FILENAME="_settings.tar.gz"
 
 fetch_version()

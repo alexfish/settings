@@ -5,7 +5,7 @@ settings
 
 Run this command in your terminal
 
-    curl -L https://raw.github.com/iceydee/settings/master/settings | bash
+    curl -L https://raw.github.com/alexefish/settings/master/settings | bash
 
 ## About
 
